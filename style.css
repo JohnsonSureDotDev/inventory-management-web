@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+}
+.main{
+    background: #000;
+}
+.upperMain{
+    display: none;
+}
+.userPhoto>img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+   
+}
+
+div{
+    width: auto;
+    height: auto;
+    margin: 5px;
+}
+td,th{
+    border: 1px solid black;
+    text-align: center;
+    padding: 4px;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 10px;
+    background: #fff;
+    width: 100%;
+}
+.sellBtn{
+    color: #fff;
+    background-color: rgb(34, 177, 76);
+}
+nav{
+align-items: baseline;
+    justify-content: space-between;
+    background: rgb(136, 0, 21);
+}
+.menuHolder,.menuHolder>div,nav,.userPhoto1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.userPhoto1>.username{
+text-align: centre;
+padding-top: 30px;
+font-weight: 700;
+font-family: sans-serif;
+}
+.tableHolder{
+    padding: 10px;
+    border: 1px solid blue;
+    background: pink;
+    height: 70vh;
+    overflow: auto;
+}
+.menuHolder>div>img{
+    width: 30px;
+    height: 30px;
+}
+.menuHolder>div{
+    margin: 0px 20px;
+}
+.banner{
+    text-align: center;
+    background-image: url(./images/freepik--202412040810284B9w.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: rgb(237, 28, 36);
+    font-size: 100px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.blur{
+    opacity: 0.1;
+}
+.model{
+    text-wrap: wrap;
+    word-wrap: break-word;
+    max-width:150px;
+    font-weight: 600;
+    font-size: larger;
+
+}
+thead{
+    font-weight: 900;
+    font-size: x-large;
+}
+.intermediateMain{
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+    background: #fff;
+    position: absolute;
+    top: 30vh;
+    left: 30vw;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    z-index: 2;
+text-align: center;
+}
+.obstractionLayer{
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid black;
+    background: #fff;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.6;
+   
+
+}
