@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="obstractionLayer">
+    <div id="obstractionLayer">
 
     </div>
     <div class="upperMain">
@@ -25,16 +25,30 @@
     </div>
    
     <div class="main">
-        <div class="intermediateMain">
-            <div class="sellConfirmationInterface">
-<h2>sell confirmation</h2>
-<h3>confirm sell of a04e at 2000</h3>
-<h4>if agreed sellin gprice is not 2000</h4>
-<label for="customSellingprice">enter selling price</label>
+        <div id="intermediateMain">
+            <div id="sellConfirmationInterface">
+                <div>
+               <h2>sell confirmation</h2>
+               <hr>
+<h3>confirm sell of <span id="itemSold">a04e</span> at <span id="itemSellingPrice">3000</span></h3>
+<h4>Want to change selling price ?</h4>
+<label for="customSellingprice">Enter new selling price</label>
 <input type="text" name="customSellingprice" id="customSellingPrice">
-<button class="updateprice">update price</button>            
+<button id="updateprice">update price</button>     
+                </div>
+
+<div class="confirmationBtn">
+<button id="sell">sell</button>
+<button id="cancel">cancel</button>     
+</div> 
+          
 </div>
-            <div class="addItemsinterface">
+            <div id="addItemsinterface">
+<h1>Add items</h1>
+<input type="text" name="item" id="addItemsItem1" placeholder="Enter item name">
+<input type="text" name="item" id="addItemsItem2" placeholder="Enter item model and compatibles">
+<input type="text" name="item" id="addItemsItem3" placeholder="Enter item buying price">
+<input type="text" name="item" id="addItemsItem4" placeholder="Enter item selling price">
 
             </div>
         </div>
@@ -51,12 +65,12 @@
         <div class="username">user name</div>
         </div>
        
-        <div class="search"><input type="text" name="search" id="searchBar" placeholder="search">
+        <div class="search"><input type="text" name="search" id="searchBar" placeholder="Search for a model number of the spare">
         <button id="searchActionBtn">search</button>
         </div>   
         <div class="menuHolder">
             <div id="messages"><img src="./icons/messenger.png" alt="" srcset=""></div>
-            <div id="additems"><img src="./icons/plus.png" alt="" srcset=""></div>
+            <div id="addItems"><img src="./icons/plus.png" alt="" srcset=""></div>
             <div id="print"><img src="" alt="print" srcset=""></div>
             <div id="menu"><img src="./icons/menu.png" alt="" srcset=""></div>
         </div>
@@ -77,34 +91,7 @@
                 <th>sell</th>
             </thead>
              <tbody class="appendToMe">
-          <!--      <tr>
-                    <td class="boxNo"></td>
-                    <td class="item"></td>
-                    <td class="model"></td>
-                    <td class="sellingPrice blur"></td>
-                    <td class="inStock"></td>
-                    <td class="numberOfSold blur"></td>
-                    <td class="buyingPrice blur"></td>
-                    <td class="profit blur"></td>
-                    <td class="dayBought"></td>
-                    <td class="daysold"></td>
-                    <td><button id="sellBtn">sell</button></td>
-                </tr> -->
-  
-             <!--    <tr>
-                    <td><b>totals</b></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td class="totalInstock" ></td>
-                    <td  class="totalSold blur"></td>
-                    <td>-</td>
-                    <td class="totalProfit blur"></td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td><button class="blurBtn">blur</button></td>
-                </tr> -->
-            </tbody>
+         </tbody>
         </table>
     </div>
 </div>
@@ -128,6 +115,7 @@
                 <li><h4>total amount sold <span class="totalAmountSold"></span></h4> </li>
             </ul>
         </p>
+        <button id="blurBtn">blur</button>
     </div>
    
     <script src="index.js"></script>
