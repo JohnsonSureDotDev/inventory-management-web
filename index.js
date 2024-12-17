@@ -135,9 +135,6 @@ xmlhttp.send();
             return Number(z.textContent)-1
           }
          }) ()).toString();
-        parentElm.children[9].textContent=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-
-     
           const xhttp = new XMLHttpRequest();
           xhttp.open("POST", "serverPost.php");
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -147,25 +144,11 @@ xmlhttp.send();
           xhttp.send(`query=UPDATE records
 SET selling_price=
 ${Number(parentElm.children[3].textContent)} ,
- day_sold=${parentElm.children[9].textContent} ,
+ day_sold="${date.getFullYear()}-${date.getMonth()}-${date.getDate()}" ,
  in_stock=${Number(parentElm.children[4].textContent)},
  sold=${Number(parentElm.children[5].textContent)},
  profit=${Number(parentElm.children[7].textContent)}
 WHERE box_no=${Number(parentElm.children[0].textContent)};`);
-
-
-         /*
-
-         
-         $sql = "";
-          $sql .= "INSERT INTO user_info (first_name, last_name, gfg_username)
-          VALUES ('John', 'Doe', 'john@example.com');";
-          $sql .= "INSERT INTO user_info (first_name, last_name, gfg_username)
-          VALUES ('Mary', 'Moe', 'mary@example.com');";
-          $sql .= "INSERT INTO user_info (first_name, last_name, gfg_username)
-          VALUES ('Julie', 'Dooley', 'julie@example.com')"; */
-
-
 
 
           
@@ -259,7 +242,8 @@ WHERE box_no=${Number(parentElm.children[0].textContent)};`);
       searchInputField.focus()
     })
   }, 100);
-
+ const date2=new Date()
+ console.log(`${date2.getFullYear()}-${date2.getMonth()}-${date2.getDate()}`)
   /* 
   BEST PRACTICES
   .avoid global variables instead use options like closures
