@@ -1,154 +1,265 @@
-
+let sellIsValid=0;
 const parentHtml=document.getElementsByClassName("appendToMe")[0];
 const blurBtn=document.getElementById("blurBtn");
 let searchInputField=document.getElementById("searchBar")
-const addItems=document.getElementById("addItems")
+const sell=document.getElementById("sell")
 const searchInputBtn=document.getElementById("searchActionBtn")
 const cancel=document.getElementById("cancel")
+const customSp=document.getElementById("customSellingPrice")
+const cspActive=document.getElementById("cspActive")
 let formDatabase= [];
+//fetching from db
 const xmlhttp = new XMLHttpRequest();
-xmlhttp.onload = function() {
- // 
-// console.log(formDatabase[1]) 
+xmlhttp.onload = function() { 
 let data1=JSON.parse(this.responseText)
-/* formDatabase [11]= data1 */
-//console.log(formDatabase)
-
 for(let i=0;i<data1.length;i++){
-  let arr=[data1[i].box_no,data1[i].item_name.toUpperCase(),data1[i].model_no,data1[i].selling_price,data1[i].in_stock,data1[i].sold,data1[i].buying_price,data1[i].profit,data1[i].day_bought,data1[i].day_sold]
+  let arr=[
+    data1[i].box_no,
+    data1[i].item_name.toUpperCase(),
+    data1[i].model_no,
+    data1[i].selling_price,
+    data1[i].in_stock,
+    data1[i].sold,
+    data1[i].buying_price,
+    data1[i].profit,
+    data1[i].day_bought,
+    data1[i].day_sold]
   formDatabase.push(arr)
-  /* console.log(formDatabase.length) */
 }}
 xmlhttp.open("GET", "serverSendAndRecieveData.php");
 xmlhttp.send();
-  function blurMe(color){
-    const toBlur = document.querySelectorAll(".blur");
-    toBlur.forEach(e=>{
-          e.style.backgroundColor=color
-          e.style.opacity="1"; 
+
+
+
+  setTimeout(() => {
+    function blurMe(color){
+      const toBlur = document.querySelectorAll(".blur");
+      toBlur.forEach(e=>{
+            if(e.parentElement.style.backgroundColor==="red"){
+              e.style.backgroundColor="red"
+            }else{
+              e.style.backgroundColor=color
+            }
+             e.style.opacity==="0"?e.style.opacity="1":e.style.opacity="0";              
+        })
+    
+    }
+  
+  
+  
+  
+    function createElm(elm,parent,classOrId,classNameOrIdName,nodeContent,hasTxt){
+        const node=document.createTextNode(nodeContent?? "-" /* nodeContent */ )
+                  const el=document.createElement(elm)
+                  el.setAttribute(classOrId,classNameOrIdName)
+                 !hasTxt?el.appendChild(node):""
+                  parent.appendChild(el);
+                  return el
+    }
+  
+  
+    //populating the table with data and elements
+    function createElmAndContent(a,b,c,d,e,f,g,h,i,j){
+            const tr=document.createElement("tr")
+             tr.setAttribute("class","row");
+             for(let z=0;z<11;z++){
+              switch (z) {
+                  case 0:
+                    createElm("td",tr,"class","boxNo",a)
+                      break;
+              
+                  case 1:
+                     createElm("td",tr,"class","item",b)
+                        break;
+              
+                  case 2:
+                    createElm("td",tr,"class","model",c)
+                 
+                   
+                      break;
+              
+                  case 3:
+                    createElm("td",tr,"class","sellingPrice blur",d)
+                      break;
+              
+                  case 4:
+                    let ret= createElm("td",tr,"class","inStock",e)
+                    if(Number(e)<=0){
+                    ret.parentElement.style.backgroundColor="red"
+                    }
+                      break;
+              
+                  case 5:
+                    createElm("td",tr,"class","numberOfSold blur",f)
+                      break;
+              
+                  case 6:
+                    createElm("td",tr,"class","buyingPrice blur",g)
+                      break;
+              
+                  case 7:
+                    createElm("td",tr,"class","profit blur",h)
+                      break;
+              
+                  case 8:
+                    createElm("td",tr,"class","dayBought",i)
+                      break;
+              
+                  case 9:
+                    createElm("td",tr,"class","daysold",j)
+                      break;
+                  case 10:  
+                   const elementCreated=createElm("td",tr,"class","sellBtn","sell")
+    
+                   elementCreated.addEventListener("click",()=>{
+                    document.getElementById("obstractionLayer").textContent=""
+        
+                   const date=new Date()
+                   let parentElm=elementCreated.parentElement
+                   document.getElementById("obstractionLayer").style.display="block"
+                   document.getElementById("intermediateMain").style.display="flex"
+                   document.getElementById("itemSold").textContent=`  ${parentElm.children[2].textContent.split(",").join("/")} (${parentElm.children[1].textContent})  `
+                   document.getElementById("itemSellingPrice").textContent=`${ parentElm.style.backgroundColor==="red"?"cant sell: item out of stock":parentElm.children[3].textContent}`
+    function sellValid(){
+      let w=parentElm.children[6]
+      let x=parentElm.children[7]
+      let y=parentElm.children[5]
+      let z=parentElm.children[4]
+        x.textContent=(Number(parentElm.children[3].textContent)-Number(w.textContent)).toString()
+        y.textContent=Number(z.textContent)<=0?(Number(y.textContent)).toString():(Number(y.textContent)+1).toString()
+        z.textContent=((()=>{
+          if((Number(z.textContent)-1)<=0){
+    parentElm.style.backgroundColor="red"
+            return 0
+          }else{
+            return Number(z.textContent)-1
+          }
+         }) ()).toString();
+        parentElm.children[9].textContent=`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+
+     
+          const xhttp = new XMLHttpRequest();
+          xhttp.open("POST", "serverPost.php");
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.onload = function() {
+            console.log(this.responseText);
+          }
+          xhttp.send(`query=UPDATE records
+SET selling_price=
+${Number(parentElm.children[3].textContent)} ,
+ day_sold=${parentElm.children[9].textContent} ,
+ in_stock=${Number(parentElm.children[4].textContent)},
+ sold=${Number(parentElm.children[5].textContent)},
+ profit=${Number(parentElm.children[7].textContent)}
+WHERE box_no=${Number(parentElm.children[0].textContent)};`);
+
+
+         /*
+
+         
+         $sql = "";
+          $sql .= "INSERT INTO user_info (first_name, last_name, gfg_username)
+          VALUES ('John', 'Doe', 'john@example.com');";
+          $sql .= "INSERT INTO user_info (first_name, last_name, gfg_username)
+          VALUES ('Mary', 'Moe', 'mary@example.com');";
+          $sql .= "INSERT INTO user_info (first_name, last_name, gfg_username)
+          VALUES ('Julie', 'Dooley', 'julie@example.com')"; */
+
+
+
+
+          
+    }
+    sell.addEventListener("click",()=>{
+      parentElm.children[3].textContent=document.getElementById("itemSellingPrice").textContent
+      sellValid();
+        customSp.style.display="none"
+         sell.textContent="sell inactive"
+         sell.disabled=true
+            document.getElementById("intermediateMain").style.display="none"
+               document.getElementById("obstractionLayer").textContent="item sold Successfully!"
+            setTimeout(() => {
+                 document.getElementById("obstractionLayer").style.display="none"
+                 location.reload();
+            }, 1000);
+         
+    })
+    cspActive.addEventListener("click",()=>{
+      if(cspActive.value==="active"){
+        cspActive.value="inactive"
+        customSp.style.display="none"
+  
+        if(parentElm.style.backgroundColor==="red"){
+           sell.disabled=true
+           sell.textContent="sell inactive"
+           document.getElementById("itemSellingPrice").textContent="(can't sell:item out of stock !)"
+        }
+       
+      }else{
+        cspActive.value="active"
+        customSp.style.display="block"
+      }
       })
   
-  }
-  function createElm(elm,parent,classOrId,classNameOrIdName,nodeContent,hasTxt){
-      const node=document.createTextNode(nodeContent?? "-" /* nodeContent */ )
-                const el=document.createElement(elm)
-                el.setAttribute(classOrId,classNameOrIdName)
-               !hasTxt?el.appendChild(node):""
-                parent.appendChild(el);
-                return el
-  }
-  //populating the table with data and elements
-  function createElmAndContent(a,b,c,d,e,f,g,h,i,j){
-          const tr=document.createElement("tr")
-           tr.setAttribute("class","row");
-           for(let z=0;z<11;z++){
-            switch (z) {
-                case 0:
-                  createElm("td",tr,"class","boxNo",a)
-                    break;
-            
-                case 1:
-                   createElm("td",tr,"class","item",b)
-                      break;
-            
-                case 2:
-                  createElm("td",tr,"class","model",c)
-               
-                 
-                    break;
-            
-                case 3:
-                  createElm("td",tr,"class","sellingPrice blur",d)
-                    break;
-            
-                case 4:
-                  let ret= createElm("td",tr,"class","inStock",e)
-                  if(Number(e)<=0){
-                  ret.parentElement.style.backgroundColor="red"
-                  }
-                    break;
-            
-                case 5:
-                  createElm("td",tr,"class","numberOfSold blur",f)
-                    break;
-            
-                case 6:
-                  createElm("td",tr,"class","buyingPrice blur",g)
-                    break;
-            
-                case 7:
-                  createElm("td",tr,"class","profit blur",h)
-                    break;
-            
-                case 8:
-                  createElm("td",tr,"class","dayBought",i)
-                    break;
-            
-                case 9:
-                  createElm("td",tr,"class","daysold",j)
-                    break;
-                case 10:  
-                 const elementCreated=createElm("td",tr,"class","sellBtn","sell")
-  
-  elementCreated.addEventListener("click",()=>{
-    const date=new Date()
-  let parentElm=elementCreated.parentElement
-  function sellValid(){
-    let w=parentElm.children[6]
-    let x=parentElm.children[7]
-    let y=parentElm.children[5]
-    let z=parentElm.children[4]
-      x.textContent=(Number(parentElm.children[3].textContent)-Number(w.textContent)).toString()
-      y.textContent=Number(z.textContent)<=0?(Number(y.textContent)).toString():(Number(y.textContent)+1).toString()
-      z.textContent=((()=>{
-        if((Number(z.textContent)-1)<=0){
-  parentElm.style.backgroundColor="red"
-          return 0
-        }else{
-          return Number(z.textContent)-1
-        }
-       }) ()).toString()
-      parentElm.children[9].textContent=`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
-  }
-  sellValid()
-  })
-                    break;
-            
-                default:
-                    break;
-            }
-           }
-           parentHtml.appendChild(tr)
-  
-      }
-  
-          formDatabase.map((x)=>createElmAndContent(...x))
+    customSp.addEventListener("keyup",()=>{
+      let checker=customSp.value.trim()
+     if( isNaN(checker)||checker>Number(parentElm.children[3].textContent)||checker===""||Number(checker)===0||parentElm.style.backgroundColor==="red"){
      
+      isNaN(checker)?checker="price is Not a number":""
+       checker===""?checker="price is empty":""
+      checker>Number(parentElm.children[3].textContent)?checker=`price is more than actual selling price ${checker} is more than ${parentElm.children[3].textContent}`:""
+      Number(checker)===0?checker="invalid price":""
+      parentElm.style.backgroundColor==="red"?checker="(can't sell:item out of stock !)":""
+    sell.disabled=true
+    sell.textContent="sell inactive"
+    }else{
+      sell.disabled=false
+        sell.textContent="sell active"
   
-          searchInputField.addEventListener("click",()=>{
-            searchInputField.addEventListener("keyup",()=>{
-              while (parentHtml.hasChildNodes()){
-                parentHtml.removeChild(parentHtml.firstChild);
+    }
+      document.getElementById("itemSellingPrice").textContent=`${checker}`
+    })
+   
+  
+    })
+                      break;
+              
+                  default:
+                      break;
               }
-             
-   formDatabase.filter((x)=>x[2].toUpperCase().search(searchInputField.value.toUpperCase())>-1).map((x)=>createElmAndContent(...x))
-              })    
-            
-          })   
+             }
+             parentHtml.appendChild(tr)
     
-  addItems.addEventListener("click",()=>{
+        }
     
-     document.getElementById("obstractionLayer").style.display="block"
-     document.getElementById("intermediateMain").style.display="flex"
-     document.getElementById("addItemsinterface").style.display="flex"
-  })
-  cancel.addEventListener("click",()=>{ 
-     document.getElementById("obstractionLayer").style.display="none"
-     document.getElementById("intermediateMain").style.display="none"
-  })
-  blurBtn.addEventListener("click",()=>{
-    blurMe("white")
-  })
+            formDatabase.map((x)=>createElmAndContent(...x))
+       
+    
+            searchInputField.addEventListener("click",()=>{
+              searchInputField.addEventListener("keyup",()=>{
+                while (parentHtml.hasChildNodes()){
+                  parentHtml.removeChild(parentHtml.firstChild);
+                }
+               
+     formDatabase.filter((x)=>x[2].toUpperCase().search(searchInputField.value.toUpperCase())>-1).map((x)=>createElmAndContent(...x))
+                })    
+              
+            })   
+      
+  
+    cancel.addEventListener("click",()=>{ 
+       document.getElementById("obstractionLayer").style.display="none"
+       document.getElementById("intermediateMain").style.display="none"
+        document.getElementById("itemSellingPrice").textContent=""
+    })
+    blurBtn.addEventListener("click",()=>{
+      blurMe("white")
+    })
+    document.addEventListener("keypress",()=>{
+      searchInputField.focus()
+    })
+  }, 100);
+
   /* 
   BEST PRACTICES
   .avoid global variables instead use options like closures
@@ -162,7 +273,6 @@ xmlhttp.send();
   use=== for equality comparison
   use default parameters where function arguments lack or appply currying 
   .end switches with defaults
-  avoid use of eval for security reasonsn
+  avoid use of eval for security reasons
   */
-  
  

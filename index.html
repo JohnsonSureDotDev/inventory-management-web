@@ -3,25 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>360 inventory management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="obstractionLayer">
 
-    </div>
-    <div class="upperMain">
-        <h1>360 phone repair and spares</h1>
-         <div class="login">
-         <form action="GET" method="post">
-     <label for="userName">username</label>
-      <input type="text" name="userName" id="userName">
-      <label for="password">password</label>
-      <input type="password" name="password" id="password">
-      <a href="#" target="_blank" rel="noopener noreferrer"> <span>forgot password</span> </a>
-      <input type="button" value="login">
-   </form>
-    </div>
     </div>
    
     <div class="main">
@@ -30,27 +18,19 @@
                 <div>
                <h2>sell confirmation</h2>
                <hr>
-<h3>confirm sell of <span id="itemSold">a04e</span> at <span id="itemSellingPrice">3000</span></h3>
-<h4>Want to change selling price ?</h4>
+<h3>confirm sell of <span id="itemSold"></span> at KES<span id="itemSellingPrice"></span></h3>
+<h4>Want to change selling price ?<input type="checkbox" value="inactive" name="cspActive " id="cspActive"></h4>
+
 <label for="customSellingprice">Enter new selling price</label>
-<input type="text" name="customSellingprice" id="customSellingPrice">
-<button id="updateprice">update price</button>     
+<input  type="text" name="customSellingprice" placeholder="enter seling price to confirm" id="customSellingPrice">    
                 </div>
 
 <div class="confirmationBtn">
-<button id="sell">sell</button>
+<button disabled id="sell">sell inactive</button>
 <button id="cancel">cancel</button>     
 </div> 
           
 </div>
-            <div id="addItemsinterface">
-<h1>Add items</h1>
-<input type="text" name="item" id="addItemsItem1" placeholder="Enter item name">
-<input type="text" name="item" id="addItemsItem2" placeholder="Enter item model and compatibles">
-<input type="text" name="item" id="addItemsItem3" placeholder="Enter item buying price">
-<input type="text" name="item" id="addItemsItem4" placeholder="Enter item selling price">
-
-            </div>
         </div>
 <div class="banner">
  360
@@ -69,10 +49,9 @@
         <button id="searchActionBtn">search</button>
         </div>   
         <div class="menuHolder">
-            <div id="messages"><img src="./icons/messenger.png" alt="" srcset=""></div>
-            <div id="addItems"><img src="./icons/plus.png" alt="" srcset=""></div>
+            <div id="messages"><img src="./images/messenger.png" alt="" srcset=""></div>
             <div id="print"><img src="" alt="print" srcset=""></div>
-            <div id="menu"><img src="./icons/menu.png" alt="" srcset=""></div>
+            <div id="menu"><img src="./images/menu.png" alt="" srcset=""></div>
         </div>
     </nav>
     <div class="tableHolder">
@@ -96,28 +75,8 @@
     </div>
 </div>
     </div>
-    <div class="salesInfo blur">
-        
-        <p class="info">
-            <h1>
-                sales info on <span class="dateToday">14th/nov/2024</span>
-
-            </h1>
-            <h2>items sold today are</h2>
-            <ul>
-                <li>item1</li>
-                <li>item1</li>
-                <li>item1</li>
-                <li>item1</li>
-                <li>item1</li>
-                <li>item1</li>
-                <li>debts <span class="debtsAmount"></span></li>
-                <li><h4>total amount sold <span class="totalAmountSold"></span></h4> </li>
-            </ul>
-        </p>
-        <button id="blurBtn">blur</button>
-    </div>
-   
+  
+    <button draggable="true" id="blurBtn">blur</button>
     <script src="index.js"></script>
 </body>
 </html>

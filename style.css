@@ -4,9 +4,6 @@
 .main{
     background: #000;
 }
-.upperMain{
-    display: none;
-}
 .userPhoto>img{
     width: 50px;
     height: 50px;
@@ -54,7 +51,7 @@ font-family: sans-serif;
 .tableHolder{
     padding: 0px;
     background: pink;
-    height: 70vh;
+    height: 80vh;
     overflow: auto;
  
 }
@@ -66,6 +63,7 @@ font-family: sans-serif;
     margin: 0px 20px;
 }
 .banner{
+    aspect-ratio: 50;
     text-align: center;
     background-image: url(./images/freepik--202412040810284B9w.png);
     background-repeat: no-repeat;
@@ -75,7 +73,7 @@ font-family: sans-serif;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .blur{
-    opacity: 0.1;
+    opacity: 0;
 }
 .model{
     text-wrap: wrap;
@@ -100,7 +98,7 @@ thead{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     z-index: 2;
 text-align: center;
-display: none;
+display: none; 
 flex-direction: column;
 align-items: center;
 
@@ -113,7 +111,9 @@ align-items: center;
     position: absolute;
     z-index: 1;
     opacity: 0.6;
-    display: none;
+    text-align: center;
+    font-size: 200px;
+    display: none; 
 }
 #sell,#cancel,#blurBtn{
     background-color: green;
@@ -126,28 +126,22 @@ align-items: center;
     background-color: red;
 
 }
-.confirmationBtn{
-  margin-top: 50%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-#addItemsinterface,#sellConfirmationInterface{
-display: none;
-}
-#addItemsinterface{
+#sellConfirmationInterface{
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
+
 thead{
     position: sticky;
-    top: 0px;
+    top: 0;
     background-color: #007fff;
     color: #fff;
+    width: 100%;
+
 }
-#searchBar{
+#searchBar,#customSellingPrice{
     border-radius: 10px;
     border: 3px solid #007fff;
     text-align: left;
@@ -157,8 +151,26 @@ thead{
     padding-left: 5px;
 }
 #blurBtn{
+    height: 50px;
+    width: 50px;
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 15px;    
+    border-radius: 50%;
+    background-image:url(./images/view.png) ;
+
 /* should be draggable */
+}#blurBtn::hover{
+    background-image:url(./images/hide.png) ;
+
+}
+#itemSold,#itemSellingPrice{
+    color: blue;
+    font-size: x-large;
+}
+#itemSellingPrice{
+    color: green;
+}
+#customSellingPrice{
+    display: none;
 }
