@@ -135,13 +135,17 @@ xmlhttp.send();
             return Number(z.textContent)-1
           }
          }) ()).toString();
-          const xhttp = new XMLHttpRequest();
-          xhttp.open("POST", "serverPost.php");
+         function todb(serverName){
+                const xhttp = new XMLHttpRequest();
+          xhttp.open("POST", serverName);
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
           xhttp.onload = function() {
             console.log(this.responseText);
           }
-          xhttp.send(`query=UPDATE records
+ 
+
+    if(serverName==="serverPOST.php"){
+         xhttp.send(`query=UPDATE records
 SET selling_price=
 ${Number(parentElm.children[3].textContent)} ,
  day_sold="${date.getFullYear()}-${date.getMonth()}-${date.getDate()}" ,
@@ -149,7 +153,28 @@ ${Number(parentElm.children[3].textContent)} ,
  sold=${Number(parentElm.children[5].textContent)},
  profit=${Number(parentElm.children[7].textContent)}
 WHERE box_no=${Number(parentElm.children[0].textContent)};`);
+    }else if(serverName==="serverPOST2.php"&&!(Number(parentElm.children[0].textContent)===54)){
 
+      xhttp.send(`query=
+INSERT INTO sales_records (	box_no,item_name,model_no,selling_price,in_stock,sold,buying_price,profit,day_bought,day_sold	)
+VALUES (
+  ${Number(parentElm.children[0].textContent)},
+ "${parentElm.children[1].textContent}",
+ "${parentElm.children[2].textContent}",
+  ${Number(parentElm.children[3].textContent)} ,
+  ${Number(parentElm.children[4].textContent)} ,
+  ${Number(parentElm.children[5].textContent)} ,
+  ${Number(parentElm.children[6].textContent)} ,
+  ${Number(parentElm.children[7].textContent)} ,
+" ${parentElm.children[8].textContent}",
+" ${parentElm.children[9].textContent}"
+);`);
+    }
+
+         }
+
+         todb("serverPOST.php")
+         todb("serverPOST2.php")
 
           
     }
@@ -163,7 +188,7 @@ WHERE box_no=${Number(parentElm.children[0].textContent)};`);
                document.getElementById("obstractionLayer").textContent="item sold Successfully!"
             setTimeout(() => {
                  document.getElementById("obstractionLayer").style.display="none"
-                 location.reload();
+              location.reload(); 
             }, 1000);
          
     })
@@ -241,9 +266,8 @@ WHERE box_no=${Number(parentElm.children[0].textContent)};`);
     document.addEventListener("keypress",()=>{
       searchInputField.focus()
     })
-  }, 100);
- const date2=new Date()
- console.log(`${date2.getFullYear()}-${date2.getMonth()}-${date2.getDate()}`)
+  }, 1000);
+
   /* 
   BEST PRACTICES
   .avoid global variables instead use options like closures
