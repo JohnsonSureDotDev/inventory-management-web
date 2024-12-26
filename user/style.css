@@ -78,9 +78,9 @@ font-family: sans-serif;
   color: transparent;
     font-size: 100px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}.banner:hover{
+/* }.banner:hover{
     background-image: url(./../images/darkmode.png);
-}
+*/} 
 .model{
     text-wrap: wrap;
     word-wrap: break-word;
@@ -163,11 +163,14 @@ thead{
     top: 15px;
     right: 15px;    
     border-radius: 50%;
-    background-image:url(./images/view.png) ;
+background-color: #fff;
+box-shadow: 5px 5px 15px black;
 
 /* should be draggable */
-}#blurBtn::hover{
-    background-image:url(./images/hide.png) ;
+}#blurBtn:hover{
+    background-color: whitesmoke;
+    box-shadow: 3px 3px 7px black;
+    cursor: pointer;
 
 }
 #itemSold,#itemSellingPrice{
@@ -200,4 +203,9 @@ thead{
     width: 20px;
     border-radius: 40%;
     background: #000;
+ }
+ .username{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 200;
+    color: rgb(1, 59, 59);
  }
